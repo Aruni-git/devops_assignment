@@ -12,16 +12,26 @@
       {%- endfor %}
       
       <form action = "{{ request.path }}" method = "post">
-         <label for = "name">Name</label><br>
-         <input type = "text" name = "name" placeholder = "Name" /><br>
-       <label for = "city">City</label><br>
-         <input type = "text" name = "city" placeholder = "city" /><br> 
-         <label for = "address">Address</label><br>
-         <textarea name = "address" placeholder = "address"></textarea><br>
-         <label for = "PIN">Pin</label><br>
-         <input type = "text" name = "pin" placeholder = "pin" /><br>
+         <label for = "firstName">First Name</label><br>
+         <input type = "text" name = "firstName" placeholder = "First Name" /><br>
+
+         <label for = "lastName">Last Name</label><br>
+         <input type = "text" name = "lastName" placeholder = "Last Name" /><br>
+
+       <label for = "phone">Phone</label><br>
+         <input type = "text" name = "phone" placeholder = "phone" /><br> 
+
+         <label for = "email">Email</label><br>
+         <textarea name = "email" placeholder = "email"></textarea><br>
+
+         <label for = "department">Department</label><br>
+         <input type = "text" name = "department" placeholder = "department" /><br>
+
+         <label for = "designation">Designation</label><br>
+         <input type = "text" name = "designation" placeholder = "designation" /><br>
+         
          <input type = "submit" value = "Submit" />
       </form>
-      
+
    </body>
 </html>
