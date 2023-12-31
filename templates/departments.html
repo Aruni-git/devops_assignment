@@ -75,8 +75,8 @@
               <table class="table table-hover">
                 <thead>
                   <tr>
-                    <th scope="col">Department Id</th>
                     <th scope="col">Department Name</th>
+                    <th scope="col">Description</th>
                     
                   </tr>
                 </thead>
@@ -84,14 +84,14 @@
                   {% for department in department %}
             <tr>
               
-              <td>{{ department.departmentId }}</td>
+              <td>{{ department.department}}</td>
     
               </tr>
            
-            </tr>
+            
             <tr>
              
-              <td>{{ department.department }}</td>
+              <td>{{ department.description }}</td>
             </tr>
             
             {% endfor %}

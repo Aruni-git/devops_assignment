@@ -49,9 +49,11 @@ def __init__(self, firstName, lastName, phone,email,department,designation,uid):
 class department(db.Model):
    id = db.Column('departmentId', db.Integer, primary_key = True, autoincrement = True)
    department = db.Column(db.String(100))
+   description = db.Column(db.String(100))
 
 def __init__(self, department):
    self.department = department
+   self.description = description
    
 #navigate to home page
 @app.route('/')
@@ -111,7 +113,7 @@ def createDepartment():
       if not request.form['department'] :
          flash('Please enter all the fields', 'error')
       else:
-         department = department( department= request.form['department'],
+         department = department( department= request.form['department'],description= request.form['description']
                              )
          db.session.add(department)
          db.session.commit()
