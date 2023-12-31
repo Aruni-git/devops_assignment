@@ -25,6 +25,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, db_
 
 db = SQLAlchemy(app)
 
+#employees table
 class employees(db.Model):
    id = db.Column('eid', db.Integer, primary_key = True, autoincrement = True)
    firstName = db.Column(db.String(100))
@@ -44,6 +45,14 @@ def __init__(self, firstName, lastName, phone,email,department,designation,uid):
    self.designation = designation
    self.uid = uid
 
+#departments table
+class department(db.Model):
+   id = db.Column('departmentId', db.Integer, primary_key = True, autoincrement = True)
+   department = db.Column(db.String(100))
+
+def __init__(self, department):
+   self.department = department
+   
 #navigate to home page
 @app.route('/')
 def home():
@@ -70,9 +79,9 @@ def new():
          db.session.add(employee)
          db.session.commit()
          flash('Record was successfully added')
-         return redirect(url_for('show_all'))
+         return redirect(url_for('employees'))
    
-   return render_template('new.html')
+   return render_template('employees.html')
 
 # #update an employee
 # @app.route('/update', methods = 'PUT')
@@ -89,6 +98,27 @@ def new():
 #          return redirect(url_for('show_all'))
 #    flash('Record was successfully added')
 #    return render_template('new.html')
+
+ #view all departments
+@app.route('/departments')
+def viewDepartments():
+   return render_template('departments.html', department = department.query.all() )
+
+#create new department
+@app.route('/new', methods = ['GET', 'POST'])
+def createDepartment():
+   if request.method == 'POST':
+      if not request.form['department'] :
+         flash('Please enter all the fields', 'error')
+      else:
+         department = department( department= request.form['department'],
+                             )
+         db.session.add(department)
+         db.session.commit()
+         flash('Department was successfully added')
+         return redirect(url_for('departments.html'))
+   
+   return render_template('departments.html')
 
 if __name__ == '__main__':
    db.create_all()

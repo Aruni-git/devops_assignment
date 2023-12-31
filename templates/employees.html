@@ -62,18 +62,18 @@
           <tbody>
             {% for employee in employees %}
             <tr>
-              <th scope="row">1</th>
+             
               <td>{{ employee.firstName }}</td>
     
               </tr>
            
             </tr>
             <tr>
-              <th scope="row">2</th>
+             
               <td>{{ employee.lastName }}</td>
             </tr>
             <tr>
-              <th scope="row">3</th>
+            
               <td>{{ employee.phone }}</td>
             </tr>
             {% endfor %}
@@ -84,7 +84,7 @@
         <div class="bs-component" style="width: 90%;">
           <h3>Add Employee</h3>
           <hr>
-          <form>
+          <form action = "{{ request.path }}" method = "post">
             <fieldset>
               <div class="form-group">
                 <label for="firstName" class="form-label mt-4">First Name</label>
