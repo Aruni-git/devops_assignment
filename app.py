@@ -47,12 +47,12 @@ def __init__(self, firstName, lastName, phone,email,department,designation,uid):
 #navigate to home page
 @app.route('/')
 def home():
-   return render_template('home.html')
+   return render_template('dashboard.html')
 
  #show all
 @app.route('/show_all')
 def show_all():
-   return render_template('show_all.html', employees = employees.query.all() )
+   return render_template('employees.html', employees = employees.query.all() )
 
 #get employee/ create a new employee
 @app.route('/new', methods = ['GET', 'POST'])

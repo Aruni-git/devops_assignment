@@ -31,7 +31,7 @@
             <a class="nav-link" href="roles.html">Roles</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="emplyees.html">Employees</a>
+            <a class="nav-link" href="employees.html">Employees</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="index.html">Logout</a>
@@ -60,24 +60,23 @@
             </tr>
           </thead>
           <tbody>
+            {% for employee in employees %}
             <tr>
               <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
+              <td>{{ employee.firstName }}</td>
+    
+              </tr>
+           
             </tr>
             <tr>
               <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
+              <td>{{ employee.lastName }}</td>
             </tr>
             <tr>
               <th scope="row">3</th>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
+              <td>{{ employee.phone }}</td>
             </tr>
+            {% endfor %}
           </tbody>
         </table>
       </div>
