@@ -1,0 +1,30 @@
+.left {
+    background: grey !important;  
+  }
+  
+  .right {
+    background: black !important;  
+  }
+  
+  .main-wrapper {
+    height: 100vh !important;  
+  }
+  
+  .section {
+    height: 100% !important;  
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+  
+  .half {
+    background: #f9f9f9 !important;
+    height: 50% !important;  
+    width: 100% !important;
+    margin: 15px 0 !important;
+  }
+  
+  h4 {
+    color: white !important;  
+  }

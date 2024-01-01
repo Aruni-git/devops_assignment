@@ -3,6 +3,8 @@ from flask import Flask, request, flash, url_for, redirect, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 
+
+
 app = Flask(__name__)
 Bootstrap(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///employees.sqlite3'
@@ -49,21 +51,16 @@ def __init__(self, firstName, lastName, phone,email,department,designation,uid):
 class department(db.Model):
    id = db.Column('departmentId', db.Integer, primary_key = True, autoincrement = True)
    department = db.Column(db.String(100))
-   description = db.Column(db.String(100))
 
 def __init__(self, department):
    self.department = department
-   self.description = description
    
 #navigate to home page
 @app.route('/')
 def home():
    return render_template('dashboard.html')
 
- #show all
-@app.route('/show_all')
-def show_all():
-   return render_template('employees.html', employees = employees.query.all() )
+
 
 #get employee/ create a new employee
 @app.route('/new', methods = ['GET', 'POST'])
@@ -81,9 +78,37 @@ def new():
          db.session.add(employee)
          db.session.commit()
          flash('Record was successfully added')
-         return redirect(url_for('employees'))
+      return render_template('employees.html')
+
    
    return render_template('employees.html')
+
+# Create New
+@app.route('/addemployee', methods=['GET', 'POST'])
+def addEmployee():
+    if request.method == 'POST':
+        date = request.form['date']
+        title = request.form['blog_title']
+        post = request.form['blog_main']
+        post_entry = models.BlogPost(date = date, title = title, post = post)
+        db.session.add(post_entry)
+        db.session.commit()
+        return redirect(url_for('database'))
+    else:
+        return render_template('entry.html')
+
+@app.route('/database', methods=['GET', 'POST'])        
+def database():
+    query = []
+    for i in session.query(models.BlogPost):
+        query.append((i.title, i.post, i.date))
+    return render_template('database.html', query = query)
+ 
+ 
+  #show all
+@app.route('/show_all')
+def show_all():
+   return render_template('employees.html', employees = employees.query.all() )
 
 # #update an employee
 # @app.route('/update', methods = 'PUT')
@@ -107,18 +132,18 @@ def viewDepartments():
    return render_template('departments.html', department = department.query.all() )
 
 #create new department
-@app.route('/new', methods = ['GET', 'POST'])
+@app.route('/newD', methods = ['GET', 'POST'])
 def createDepartment():
    if request.method == 'POST':
-      if not request.form['department'] :
+      if not request.form['department']:
          flash('Please enter all the fields', 'error')
       else:
-         department = department( department= request.form['department'],description= request.form['description']
-                             )
+         employee = employees( department= request.form['department'],
+                            )
          db.session.add(department)
          db.session.commit()
-         flash('Department was successfully added')
-         return redirect(url_for('departments.html'))
+         flash('Record was successfully added')
+         return redirect(url_for('departments'))
    
    return render_template('departments.html')
 
