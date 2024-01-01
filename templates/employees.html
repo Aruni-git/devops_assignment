@@ -84,31 +84,31 @@
         <div class="bs-component" style="width: 90%;">
           <h3>Add Employee</h3>
           <hr>
-          <form method = "post" action = "{{ url_for('new') }}" enctype="multipart/form-data">
+          <form method = "post" action = "{{ url_for('addemployee') }}" enctype="multipart/form-data">
             <fieldset>
               <div class="form-group">
                 <label for="firstName" class="form-label mt-4">First Name</label>
-                <input type="text" class="form-control" id="firstName">
+                <input type="text" class="form-control" name="firstName">
               </div>
               <div class="form-group">
                 <label for="lastName" class="form-label mt-4">Last Name</label>
-                <input type="text" class="form-control" id="lastName">
+                <input type="text" class="form-control" name="lastName">
               </div>
               <div class="form-group">
                 <label for="phone" class="form-label mt-4">Phone</label>
-                <input type="text" class="form-control" id="phone">
+                <input type="text" class="form-control" name="phone">
               </div>
               <div class="form-group">
                 <label for="exampleInputEmail1" class="form-label mt-4">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <input type="email" class="form-control" name="exampleInputEmail1" aria-describedby="emailHelp">
               </div>
               <div class="form-group">
                 <label for="department" class="form-label mt-4">Deparment</label>
-                <input type="text" class="form-control" id="department">
+                <input type="text" class="form-control" name="department">
               </div>
               <div class="form-group">
                 <label for="designation" class="form-label mt-4">Designation</label>
-                <input type="text" class="form-control" id="designation">
+                <input type="text" class="form-control" name="designation">
               </div>
               <div class="form-group">
                 <br>

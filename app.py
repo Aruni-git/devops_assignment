@@ -60,55 +60,33 @@ def __init__(self, department):
 def home():
    return render_template('dashboard.html')
 
-
+#show all
+@app.route('/show_all')
+def show_all():
+   return render_template('employees.html', employees = employees.query.all() )
 
 #get employee/ create a new employee
-@app.route('/new', methods = ['GET', 'POST'])
-def new():
+@app.route('/addemployee', methods = ['GET', 'POST'])
+def addemployee():
    if request.method == 'POST':
-      if not request.form['firstName'] or not request.form['lastName'] or not request.form['email']:
-         flash('Please enter all the fields', 'error')
-      else:
+    #  if not request.form['firstName'] or not request.form['lastName'] or not request.form['email']:
+    #     flash('Please enter all the fields', 'error')
+     # else:
          employee = employees( firstName= request.form['firstName'],
                              lastName=request.form['lastName'],
             phone =request.form['phone'], 
-            email =request.form['email'] ,
+            email =request.form['email'],
             department =request.form['department'],
             designation =request.form['designation'])
          db.session.add(employee)
          db.session.commit()
          flash('Record was successfully added')
-      return render_template('employees.html')
-
-   
+         return redirect(url_for('show_all'))
+      
    return render_template('employees.html')
 
-# Create New
-@app.route('/addemployee', methods=['GET', 'POST'])
-def addEmployee():
-    if request.method == 'POST':
-        date = request.form['date']
-        title = request.form['blog_title']
-        post = request.form['blog_main']
-        post_entry = models.BlogPost(date = date, title = title, post = post)
-        db.session.add(post_entry)
-        db.session.commit()
-        return redirect(url_for('database'))
-    else:
-        return render_template('entry.html')
-
-@app.route('/database', methods=['GET', 'POST'])        
-def database():
-    query = []
-    for i in session.query(models.BlogPost):
-        query.append((i.title, i.post, i.date))
-    return render_template('database.html', query = query)
  
  
-  #show all
-@app.route('/show_all')
-def show_all():
-   return render_template('employees.html', employees = employees.query.all() )
 
 # #update an employee
 # @app.route('/update', methods = 'PUT')
