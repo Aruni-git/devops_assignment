@@ -40,46 +40,52 @@
       </div>
     </div>
   </div>
-  <div class="container-fluid">
-    <div class="col text-center" style="margin-top:57px">
-     <img src="{{url_for('static', filename='hr3.jpg')}}"/>
-    </div>
-
-    <div class="row justify-content-center align-items-center" style="margin-top:10px">
-
+  <div class="container">
+    <br>
+    <br>
+    <br>
+   
+    <div class="row">
       <div class="col-lg-4">
-        <div class="card border-success mb-3" style="width:100%">
-          <div class="card-header">Departments</div>
-          <div class="card-body">
-            <img style="width: 100px;" src="{{url_for('static', filename='building.png')}}">
-            <a class="btn btn-primary" href="departments" role="button">Manage Deparments</a>
-            <button type="button" class="btn btn-info"><i class="bi bi-arrow-right-circle-fill"></i></button>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4">
-        <div class="card border-success mb-3" style="width:100%">
-          <div class="card-header">Roles</div>
-          <div class="card-body">
-            <img style="width: 100px;" src="{{url_for('static', filename='user-setting.png')}}">
-            Manage User Roles
-            <button type="button" class="btn btn-primary"><i class="bi bi-arrow-right-circle-fill"></i></button>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4">
-        <div class="card border-success mb-3" style="width:100%">
-          <div class="card-header">Users</div>
-          <div class="card-body">
-            <img style="width: 100px;" src="{{url_for('static', filename='people.png')}}">
-            <a class="btn btn-primary" href="newemployee" role="button">Manage Users</a>
-            <button type="button" class="btn btn-warning" ><i class="bi bi-arrow-right-circle-fill"></i></button>
-          </div>
+        <div class="bs-component" style="width: 90%;">
+          <h3>Add Employee</h3>
+          <hr>
+          <form action = "{{ url_for('newemployee') }}" method = "post" enctype="multipart/form-data">
+            <fieldset>
+              <div class="form-group">
+                <label for="firstName" class="form-label mt-4">First Name</label>
+                <input type="text" name="firstName" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="lastName" class="form-label mt-4">Last Name</label>
+                <input type="text" name="lastName" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="phone" class="form-label mt-4">Phone</label>
+                <input type="text" name="phone" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1" class="form-label mt-4">Email address</label>
+                <input type="email" name="email" class="form-control" aria-describedby="emailHelp">
+              </div>
+              <div class="form-group">
+                <label for="department" class="form-label mt-4">Deparment</label>
+                <input type="text" name="department" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="designation" class="form-label mt-4">Designation</label>
+                <input type="text" name="designation" class="form-control">
+              </div>
+              <div class="form-group">
+                <br>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </fieldset>
+          </form>
         </div>
       </div>
     </div>
   </div>
   </div>
 </body>
-
 </html>

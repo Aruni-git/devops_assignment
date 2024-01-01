@@ -66,8 +66,8 @@ def show_all():
    return render_template('employees.html', employees = employees.query.all() )
 
 #get employee/ create a new employee
-@app.route('/addemployee', methods = ['GET', 'POST'])
-def addemployee():
+@app.route('/newemployee', methods = ['GET', 'POST'])
+def newemployee():
    if request.method == 'POST':
     #  if not request.form['firstName'] or not request.form['lastName'] or not request.form['email']:
     #     flash('Please enter all the fields', 'error')
@@ -83,7 +83,7 @@ def addemployee():
          flash('Record was successfully added')
          return redirect(url_for('show_all'))
       
-   return render_template('employees.html')
+   return render_template('newemployee.html')
 
  
  
