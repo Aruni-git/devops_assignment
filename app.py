@@ -60,6 +60,10 @@ def __init__(self, department):
 def home():
    return render_template('dashboard.html')
 
+@app.route('/dashboard')
+def dashboard():
+   return render_template('dashboard.html')
+
 #show all
 @app.route('/show_all')
 def show_all():
@@ -69,9 +73,7 @@ def show_all():
 @app.route('/newemployee', methods = ['GET', 'POST'])
 def newemployee():
    if request.method == 'POST':
-    #  if not request.form['firstName'] or not request.form['lastName'] or not request.form['email']:
-    #     flash('Please enter all the fields', 'error')
-     # else:
+
          employee = employees( firstName= request.form['firstName'],
                              lastName=request.form['lastName'],
             phone =request.form['phone'], 
@@ -81,12 +83,31 @@ def newemployee():
          db.session.add(employee)
          db.session.commit()
          flash('Record was successfully added')
-         return redirect(url_for('show_all'))
+         return redirect(url_for('allemployees'))
       
    return render_template('newemployee.html')
 
- 
- 
+#create new department
+@app.route('/newdepartment', methods = ['GET', 'POST'])
+def newdepartment():
+   if request.method == 'POST':
+         department = department( department= request.form['department'],)
+         db.session.add(department)
+         db.session.commit()
+         flash('Record was successfully added')
+         return redirect(url_for('alldepartments'))
+   
+   return render_template('newdepartment.html')
+
+@app.route('/allemployees')
+def allemployees():
+   return render_template('employees.html', employees = employees.query.all() )
+
+@app.route('/alldepartments')
+def alldepartments():
+   return render_template('departments.html', department = department.query.all() )
+
+
 
 # #update an employee
 # @app.route('/update', methods = 'PUT')
@@ -105,25 +126,7 @@ def newemployee():
 #    return render_template('new.html')
 
  #view all departments
-@app.route('/departments')
-def viewDepartments():
-   return render_template('departments.html', department = department.query.all() )
 
-#create new department
-@app.route('/newD', methods = ['GET', 'POST'])
-def createDepartment():
-   if request.method == 'POST':
-      if not request.form['department']:
-         flash('Please enter all the fields', 'error')
-      else:
-         employee = employees( department= request.form['department'],
-                            )
-         db.session.add(department)
-         db.session.commit()
-         flash('Record was successfully added')
-         return redirect(url_for('departments'))
-   
-   return render_template('departments.html')
 
 if __name__ == '__main__':
    db.create_all()
