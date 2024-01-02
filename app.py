@@ -2,7 +2,7 @@ import os
 from flask import Flask, request, flash, url_for, redirect, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
-
+from flask_login import LoginManager, UserMixin, login_user, logout_user
 
 
 app = Flask(__name__)
@@ -26,6 +26,16 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, db_name)
 
 db = SQLAlchemy(app)
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+
+#User Table
+class Users(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(250), unique=True, nullable=False)
+    password = db.Column(db.String(250), nullable=False)
 
 #employees table
 class employees(db.Model):
@@ -55,10 +65,31 @@ class department(db.Model):
 def __init__(self, department):
    self.department = department
    
+   
+@login_manager.user_loader
+def loader_user(user_id):
+    return Users.query.get(user_id)
+ 
+ 
+@app.route("/userlogin", methods=["GET", "POST"])
+def userlogin():
+    if request.method == "POST":
+        User = Users.query.filter_by(
+            username=request.form.get("username")).first()
+        if User.password == request.form.get("password"):
+            login_user(User)
+            return redirect(url_for("dashboard"))
+    return render_template("login.html")
+ 
+@app.route("/userlogout")
+def userlogout():
+    logout_user()
+    return redirect(url_for("userlogin"))
+   
 #navigate to home page
 @app.route('/')
 def home():
-   return render_template('dashboard.html')
+   return render_template('login.html')
 
 @app.route('/dashboard')
 def dashboard():
@@ -99,6 +130,8 @@ def newdepartment():
    
    return render_template('newdepartment.html')
 
+
+
 @app.route('/allemployees')
 def allemployees():
    return render_template('employees.html', employees = employees.query.all() )
@@ -106,6 +139,8 @@ def allemployees():
 @app.route('/alldepartments')
 def alldepartments():
    return render_template('departments.html', department = department.query.all() )
+
+
 
 
 
