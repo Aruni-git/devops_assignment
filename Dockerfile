@@ -1,5 +1,5 @@
 # start by pulling the python image
-FROM python:3.8-alpine
+FROM python:3.9-alpine
 
 # copy the requirements file into the image
 COPY ./requirements.txt /app/requirements.txt
@@ -15,6 +15,6 @@ RUN pip install -r requirements.txt
 COPY . /app
 
 # configure the container to run in an executed manner
-ENTRYPOINT [ "python" ]
+#ENTRYPOINT [ "python" ]
 
-CMD ["view.py" ]
+CMD flask run --host 0.0.0.0
