@@ -10,16 +10,6 @@ Bootstrap(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///employees.sqlite3'
 app.config['SECRET_KEY'] = "random string"
 
-
-# # blueprint for auth routes in our app
-# from .auth import auth as auth_blueprint
-# app.register_blueprint(auth_blueprint)
-
-#     # blueprint for non-auth parts of app
-# from .main import main as main_blueprint
-# app.register_blueprint(main_blueprint)
-
-
 # these two lines added to mac os support
 db_name = 'employee.db'
 basedir = os.path.abspath(os.path.dirname(__file__))
