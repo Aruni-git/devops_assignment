@@ -54,7 +54,22 @@ class department(db.Model):
 
 def __init__(self, department):
    self.department = department
-   
+
+@app.route("/userlogin", methods=["GET", "POST"])
+def userlogin():
+    if request.method == "POST":
+        User = Users.query.filter_by(
+            username=request.form.get("username")).first()
+        if User.password == request.form.get("password"):
+            login_user(User)
+            return redirect(url_for("dashboard"))
+    return render_template("login.html")
+ 
+@app.route("/userlogout")
+def userlogout():
+    logout_user()
+    return redirect(url_for("userlogin"))
+
 #navigate to home page
 @app.route('/')
 def home():
