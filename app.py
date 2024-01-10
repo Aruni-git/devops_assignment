@@ -2,7 +2,7 @@ import os
 from flask import Flask, request, flash, url_for, redirect, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
-from flask_login import LoginManager, UserMixin, login_user, logout_user
+#from flask_login import LoginManager, UserMixin, login_user, logout_user
 
 
 app = Flask(__name__)
@@ -27,8 +27,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, db_
 
 db = SQLAlchemy(app)
 
-login_manager = LoginManager()
-login_manager.init_app(app)
+#login_manager = LoginManager()
+#login_manager.init_app(app)
 
 
 #User Table
@@ -70,20 +70,20 @@ def loader_user(user_id):
     return Users.query.get(user_id)
 
 
-@app.route("/userlogin", methods=["GET", "POST"])
-def userlogin():
-    if request.method == "POST":
-        User = Users.query.filter_by(
-            username=request.form.get("username")).first()
-        if User.password == request.form.get("password"):
-            login_user(User)
-            return redirect(url_for("dashboard"))
-    return render_template("login.html")
+# @app.route("/userlogin", methods=["GET", "POST"])
+# def userlogin():
+#    if request.method == "POST":
+#        User = Users.query.filter_by(
+#            username=request.form.get("username")).first()
+#        if User.password == request.form.get("password"):
+#            login_user(User)
+#            return redirect(url_for("dashboard"))
+#   return render_template("login.html")
 
-@app.route("/userlogout")
-def userlogout():
-    logout_user()
-    return redirect(url_for("userlogin"))
+#@app.route("/userlogout")
+#def userlogout():
+#    logout_user()
+#    return redirect(url_for("userlogin"))
    
 #navigate to home page
 @app.route('/')
