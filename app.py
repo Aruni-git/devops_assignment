@@ -58,7 +58,7 @@ def __init__(self, department):
 #navigate to home page
 @app.route('/')
 def home():
-   return render_template('dashboard.html')
+   return render_template('login.html')
 
 @app.route('/dashboard')
 def dashboard():
