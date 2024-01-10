@@ -25,7 +25,7 @@ env:
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main_b2" ]
   workflow_dispatch:
 
 permissions:
