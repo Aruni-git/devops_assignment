@@ -88,7 +88,7 @@ def userlogout():
 #navigate to home page
 @app.route('/')
 def home():
-   return render_template('login.html')
+   return render_template('dashboard.html')
 
 @app.route('/dashboard')
 def dashboard():
